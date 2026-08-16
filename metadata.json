@@ -1,0 +1,6 @@
+{
+  "name": "MT Manager",
+  "description": "MT Manager - Gelişmiş Çift Panelli Dosya Yöneticisi, DEX Editor++, ARSC/Smali Düzenleyici, APK İmzalama ve VIP Mod Araçları",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
