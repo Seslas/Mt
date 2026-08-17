@@ -77,7 +77,7 @@ while [ -h "$PRG" ] ; do
     if expr "$link" : '/.*' > /dev/null; then
         PRG="$link"
     else
-        PRG=$(dirname "$PRG")"/"$link"
+        PRG=$(dirname "$PRG")/"$link"
     fi
 done
 PRG=$(cd "$(dirname "$PRG")" || exit 1; pwd -P)
@@ -125,7 +125,7 @@ if [ "$cygwin" = "true" -o "$msys" = "true" ] ; then
     APP_HOME=$(cygpath --path --mixed "$APP_HOME")
     CP="$APP_HOME/gradle/wrapper/gradle-wrapper.jar"
     CP=$( cygpath --path --mixed "$CP" )
-    CLASSPATH="${CP}"
+    CLASSPATH="$CP"
     JAVACMD=$(cygpath --mixed "$JAVACMD")
 
     # Now convert the arguments - kludge to limit ourselves to /bin/sh
@@ -139,7 +139,7 @@ if [ "$cygwin" = "true" -o "$msys" = "true" ] ; then
         then
             arg=$(cygpath --path --mixed "$arg")
         fi
-        arg=$(printf '%s\n' "$arg" | sed "s/'/'\\\\''/g") # let Bash ownside effect variables unless running in POSIX mode
+        arg=$(printf '%s\n' "$arg" | sed "s/'/'\\\\''/g")
         CLASS="$CLASS$arg"
         case $arg in
           */)   trailing_slash=1 ;;
@@ -153,9 +153,9 @@ if [ "$cygwin" = "true" -o "$msys" = "true" ] ; then
     CLASSPATH=$( cygpath --path --mixed "$CLASSPATH" )
 
     if [ "$CLASSPATH" != "" ] ; then
-        CLASSPATH="${CLASSPATH}:${CP}"
+        CLASSPATH="$CLASSPATH:$CP"
     else
-        CLASSPATH="${CP}"
+        CLASSPATH="$CP"
     fi
     if command -v cygpath > /dev/null; then
         CLASSPATH=$(cygpath --path --mixed "$CLASSPATH")
@@ -168,9 +168,9 @@ if [ "$cygwin" = "true" -o "$msys" = "true" ] ; then
       CLASSPATH=$(echo "$CLASSPATH" | sed 's/ /\\ /g')
       JAVACMD=$(echo "$JAVACMD" | sed 's/ /\\ /g')
     fi
-    # Now we can call Gradle encapsulated in double quotes and ${CLASSPATH}
-    GRADLE_OPTS="${GRADLE_OPTS}"
-    GRADLE_OPTS="${GRADLE_OPTS} -Dorg.gradle.appname=${0##*/}"
+    # Now we can call Gradle encapsulated in double quotes and $CLASSPATH
+    GRADLE_OPTS="$GRADLE_OPTS"
+    GRADLE_OPTS="$GRADLE_OPTS -Dorg.gradle.appname=${0##*/}"
     exec "$JAVACMD" -classpath "$CLASSPATH" org.gradle.wrapper.GradleWrapperMain "$@"
 else
     # Unix/Linux
@@ -182,8 +182,8 @@ else
       JAVACMD=$(echo "$JAVACMD" | sed 's/ /\\ /g')
     fi
 
-    # Now we can call Gradle encapsulated in double quotes and ${CLASSPATH}
-    GRADLE_OPTS="${GRADLE_OPTS}"
-    GRADLE_OPTS="${GRADLE_OPTS} -Dorg.gradle.appname=${0##*/}"
+    # Now we can call Gradle encapsulated in double quotes and $CLASSPATH
+    GRADLE_OPTS="$GRADLE_OPTS"
+    GRADLE_OPTS="$GRADLE_OPTS -Dorg.gradle.appname=${0##*/}"
     exec "$JAVACMD" -classpath "$CLASSPATH" org.gradle.wrapper.GradleWrapperMain "$@"
 fi
